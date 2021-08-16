@@ -26,8 +26,10 @@ services:
     env_file: common.env
     environment:
       - JAEGER_AGENT_HOST=jaeger
-      - STOREFRONT_URL=http://localhost:3000/
-      - DASHBOARD_URL=http://localhost:9000/
+      #- STOREFRONT_URL=http://localhost:3000/
+      #- DASHBOARD_URL=http://localhost:9000/
+      - STOREFRONT_URL=https://shop.bishwa.net/
+      - DASHBOARD_URL=https://dashboard.bishwa.net/
 
   storefront:
     build:
@@ -39,7 +41,9 @@ services:
     volumes:
       - ./saleor-storefront/:/app:cached
       - /app/node_modules/
-    command: npm start -- --hostname 0.0.0.0
+    command: npm start -- --host 0.0.0.0 --disable-host-check
+    environment:
+      - API_URI=https://shopapi.bishwa.net/graphql/
 
   dashboard:
     build:
@@ -51,12 +55,14 @@ services:
     volumes:
       - ./saleor-dashboard/:/app:cached
       - /app/node_modules/
-    command: npm start -- --host 0.0.0.0
+    command: npm start -- --host 0.0.0.0 --disable-host-check
+    environment:
+      - API_URI=https://shopapi.bishwa.net/graphql/
 
   db:
     image: library/postgres:11.1-alpine
     ports:
-      - 5432:5432
+      - 6432:5432
     restart: unless-stopped
     networks:
       - saleor-backend-tier
