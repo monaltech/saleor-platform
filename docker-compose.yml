@@ -28,8 +28,10 @@ services:
       - JAEGER_AGENT_HOST=jaeger
       #- STOREFRONT_URL=http://localhost:3000/
       #- DASHBOARD_URL=http://localhost:9000/
-      - STOREFRONT_URL=https://shop.bishwa.net/
-      - DASHBOARD_URL=https://dashboard.bishwa.net/
+      #- STOREFRONT_URL=https://shop.bishwa.net/
+      #- DASHBOARD_URL=https://dashboard.bishwa.net/
+      - STOREFRONT_URL=https://mg.analytix.zone/
+      - DASHBOARD_URL=https://mgadmin.analytix.zone/
 
   storefront:
     build:
