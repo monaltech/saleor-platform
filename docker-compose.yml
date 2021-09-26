@@ -38,7 +38,7 @@ services:
       context: ./saleor-storefront
       dockerfile: ./Dockerfile.dev
     ports:
-      - 3000:3000
+      - 3500:3000
     restart: unless-stopped
     volumes:
       - ./saleor-storefront/:/app:cached
@@ -64,7 +64,7 @@ services:
   db:
     image: library/postgres:11.1-alpine
     ports:
-      - 6432:5432
+      - 5432:5432
     restart: unless-stopped
     networks:
       - saleor-backend-tier
